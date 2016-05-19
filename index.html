@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by tobi-et-al (http://jsbin.com/juyizi/6/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body ng-app="hackApp">
+  <div ng-controller="noteCtrl">
+    <form name="noteform" id="noteform" ng-submit="addNote();resetform();">
+      <input type="text" ng-model="note.data" name="note"/>
+       <button type="submit" ng-disabled="false">Go</button>
+    </form>
+    <div class="form">
+      <ul ng-repeat="n in bank track by $index">
+        <li>{{n}} <button type="submit" ng-click="removeNote($index)">X</button></li>
+      </ul>
+    </div>
+  </div>
+<script id="jsbin-javascript">
+var app  = angular.module('hackApp', []);
+
+app.controller('noteCtrl',['$scope',
+
+function($scope){
+  $scope.bank = [];
+   
+  $scope.addNote = function(){
+     $scope.bank.push($scope.note.data);
+   }; 
+  $scope.removeNote = function(n){
+     $scope.bank.splice(n,1);
+  }; 
+  $scope.resetform = function(){
+     $scope.note.data = [];
+  };
+  
+ }]);
+</script>
+</body>
+</html>
